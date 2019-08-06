@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.appcompat.widget.AppCompatTextView
 import app.matrix.wallpaperpexels.R
 import app.matrix.wallpaperpexels.WallPaperApp
-import app.matrix.wallpaperpexels.ui.activity.login.LoginActivity
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

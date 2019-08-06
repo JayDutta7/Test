@@ -1,19 +1,22 @@
-package app.matrix.wallpaperpexels.ui.base
+package app.matrix.trackingsolution.ui.base
 
 abstract class BasePresenter<V : iBaseView> : iBasePresenter<V> {
 
-     var basEView: V? = null
+  private  var basEView: V? = null
 
+    /*Attach the view To Presenter*/
     override fun onAttach(baseView: V) {
         basEView = baseView
     }
 
+    /*Detach The View From Presenter*/
     override fun onDetach() {
         basEView = null
     }
 
-    fun getBaseView(): V {
-        return basEView!!
+    /*For Get the view from Presenter*/
+    fun getBaseView(): V? {
+        return basEView
     }
 
 

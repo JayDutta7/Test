@@ -4,13 +4,17 @@ import android.app.Application
 import android.content.Context
 import android.util.Log
 import androidx.multidex.MultiDex
-import app.matrix.wallpaperpexels.localdatabase.LocalSharedPreference
+import app.matrix.wallpaperpexels.database.LocalSharedPreference
 import com.google.firebase.FirebaseApp
 
 class WallPaperApp : Application() {
 
 
     private var localdatabase: LocalSharedPreference? = null
+
+    init {
+        instance = this
+    }
 
     companion object {
         private val TAG: String = WallPaperApp::class.java.simpleName
@@ -30,16 +34,15 @@ class WallPaperApp : Application() {
 
     }
 
-    init {
-        instance = this
-    }
+
+
 
     override fun onCreate() {
         super.onCreate()
         //initialize multidex for over 65k methods in application class
         MultiDex.install(this)
 
-        val context: Context = WallPaperApp.applicationContext()
+        var context: Context = WallPaperApp.applicationContext()
 
         Log.e(TAG, "This is Application Class Oncreate")
 
@@ -47,6 +50,7 @@ class WallPaperApp : Application() {
         localdatabase = LocalSharedPreference(context)
         //initialize Firebase sdk in application class
         FirebaseApp.initializeApp(applicationContext)
+
 
     }//End Of Oncreate
 

@@ -1,37 +1,44 @@
-package app.matrix.wallpaperpexels.ui.base
+package app.matrix.trackingsolution.ui.base
 
 import android.app.Activity
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import app.matrix.trackingsolution.utility.globalMsg.GlobalViewMessage
+import app.matrix.wallpaperpexels.WallPaperApp
 import com.google.android.material.snackbar.Snackbar
 
 abstract class BaseActivity : AppCompatActivity(), iBaseView {
 
 
+    companion object {
+        private val TAG = BaseActivity::class.java.simpleName
+    }
+
     abstract fun getLayoutRes(): Int
     abstract fun getFragmentContainerId(): Int
 
     private var snackbar: Snackbar? = null
-    private var context: Context? = this
+    private var context: Context? = WallPaperApp.applicationContext()
 
 
+    /*Total Displayed Message Status*/
     override fun onSuccess(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        GlobalViewMessage.showShortToast(msg, context)
     }
 
     override fun onError(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        GlobalViewMessage.showShortToast(msg, context)
     }
 
     override fun onFailed(msg: String) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
+        GlobalViewMessage.showShortToast(msg, context)
     }
 
 
@@ -69,7 +76,7 @@ abstract class BaseActivity : AppCompatActivity(), iBaseView {
     override fun showSnackBarMessage(message: String) {
         snackbar?.setText(message)
         snackbar?.setAction("Dismiss") {
-
+            snackbar?.dismiss()
         }
         snackbar?.show()
     }
@@ -115,6 +122,21 @@ abstract class BaseActivity : AppCompatActivity(), iBaseView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        //Full Screen Not Title Bar
+        /*requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )*/
+
         setContentView(getLayoutRes())
+    }
+
+    override fun showProgressLoader() {
+        Log.e(TAG, "ShowProgress")
+    }
+
+    override fun hideProgressLoader() {
+        Log.e(TAG, "HideProgress")
     }
 }

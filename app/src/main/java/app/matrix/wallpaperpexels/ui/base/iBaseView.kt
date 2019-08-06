@@ -1,4 +1,4 @@
-package app.matrix.wallpaperpexels.ui.base
+package app.matrix.trackingsolution.ui.base
 
 import android.content.Context
 import android.view.View
@@ -40,6 +40,10 @@ interface iBaseView {
     fun onSuccess(msg:String)
     fun onError(msg:String)
     fun onFailed(msg:String)
+
+    //ProgressLoader
+    fun showProgressLoader()
+    fun hideProgressLoader()
 
 
 }

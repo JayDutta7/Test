@@ -6,24 +6,23 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.AppCompatImageView
+import app.matrix.trackingsolution.ui.base.BaseActivity
 import app.matrix.wallpaperpexels.R
 import app.matrix.wallpaperpexels.ui.activity.home.Home
 import app.matrix.wallpaperpexels.ui.activity.login.LoginActivity
 import app.matrix.wallpaperpexels.ui.activity.welcome.WecomeActivity
-import butterknife.BindView
-import butterknife.ButterKnife
+
+import kotlinx.android.synthetic.main.activity_splash.*
 
 
-class SplashActivity : AppCompatActivity(), ISplashView {
+class SplashActivity : BaseActivity(),SplashMVP.iSplashView {
+    override fun getLayoutRes(): Int {
+        return R.layout.activity_splash
+    }
 
-
-    @BindView(R.id.includeSplash2)
-    lateinit var includeSplash2: View
-
-    @BindView(R.id.splashLogo)
-    lateinit var splashLogo: AppCompatImageView
+    override fun getFragmentContainerId(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
 
     companion object {
@@ -32,18 +31,19 @@ class SplashActivity : AppCompatActivity(), ISplashView {
         private const val FADE_IN_TIME: Long = 1000
     }
 
-    private var presenter: ISplashPresenter? = null
+    private lateinit var presenter: SplashPresenter<SplashMVP.iSplashView>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        ButterKnife.bind(this)
-
-        presenter = SplashPresenter(this)
 
 
-        presenter?.onAnimate()
+        presenter = SplashPresenter()
+        presenter.onAttach(this)
+
+
+
 
 
     }
@@ -120,10 +120,6 @@ class SplashActivity : AppCompatActivity(), ISplashView {
         mAnimationSet.start()
     }
 
-    //OnDestroy for prevent memory leak if activity is no longer visible
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter?.onDestroy()
-    }
+
 
 }

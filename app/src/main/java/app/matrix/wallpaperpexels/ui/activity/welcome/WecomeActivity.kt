@@ -5,28 +5,19 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.viewpager.widget.ViewPager
 import app.matrix.wallpaperpexels.R
 import app.matrix.wallpaperpexels.WallPaperApp
-import app.matrix.wallpaperpexels.localdatabase.Constant
-import app.matrix.wallpaperpexels.ui.activity.login.LoginActivity
-import butterknife.BindView
-import butterknife.ButterKnife
-import butterknife.OnClick
-import me.relex.circleindicator.CircleIndicator
+import app.matrix.wallpaperpexels.database.Constant
+import app.matrix.wallpaperpexels.ui.activity.home.Home
+import kotlinx.android.synthetic.main.activity_wecome.*
 
 class WecomeActivity : AppCompatActivity(), IWelcomeView {
 
 
 
 
-    @BindView(R.id.welcomePager)
-    lateinit var welcomePager: ViewPager
-    @BindView(R.id.viewPagerCircleIndicator)
-    lateinit var viewPagerCircleIndicator: CircleIndicator
-    @BindView(R.id.tvSkip)
-    lateinit var tvSkip: AppCompatTextView
+
 
     private var welComePresenter: WelComePresenter? = null
 
@@ -35,8 +26,6 @@ class WecomeActivity : AppCompatActivity(), IWelcomeView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_wecome)
-        ButterKnife.bind(this)
-
         welComePresenter = WelComePresenter(this, WelcomePagerAdapter(this))
 
         //Setup viewpager
@@ -84,10 +73,10 @@ class WecomeActivity : AppCompatActivity(), IWelcomeView {
 
     }
 
-    @OnClick(R.id.tvSkip)
+
     fun skipToLogin() {
 
-        val mainIntent = Intent(this@WecomeActivity, LoginActivity::class.java)
+        val mainIntent = Intent(this@WecomeActivity, Home::class.java)
         startActivity(mainIntent)
         finish()
 

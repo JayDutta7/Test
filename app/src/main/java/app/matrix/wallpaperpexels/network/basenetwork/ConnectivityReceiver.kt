@@ -24,26 +24,7 @@ class ConnectivityReceiver: BroadcastReceiver() {
 
     }
 
-    /*fun hasInternetConnection(): Observable<Boolean> {
-        return Observable.fromCallable {
-            try {
-                // Connect to Google DNS to check for connection
-                val timeoutMs = 1500
-                val socket = Socket()
-                val socketAddress = InetSocketAddress("8.8.8.8", 53)
 
-                socket.connect(socketAddress, timeoutMs)
-                socket.close()
-
-                true
-            } catch (e: IOException) {
-                false
-            }
-        }
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-
-    }*/
 
 
 }
